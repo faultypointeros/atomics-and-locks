@@ -66,6 +66,8 @@
               rust-analyzer
 
               clang-tools
+
+              marksman
             ];
 
             env = {
