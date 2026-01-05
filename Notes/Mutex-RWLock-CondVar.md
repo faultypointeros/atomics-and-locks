@@ -1,5 +1,10 @@
 # Mutexes, Read-Write Locks and Conditional Variables
 
+## Table Of Contents
+- [Rust Mutex](#rust-mutex)
+  - [Mutex Poisoning](#mutex-poisoning)
+- [References](#references)
+
 ## Rust Mutex
 `std::sync::Mutex<T>` is a mutual exclusion privitive used to protect shared data.
 Threads can get exclusive access to the underlying data by locking a mutex. If a thread tries to lock an already locked
@@ -16,11 +21,16 @@ The `Mutex` has following methods allowing us to work with it:
 - get mutable reference to underlying data: `get_mut()`
 
 ### Mutex Poisoning
-> [!TODO]
+If the thread holding a mutex panics, the mutex becomes poisoned. Other threads can lock a poisoned mutex, but instead of getting a MutexGuard
+they get back `PoisonError`. This is why `lock` and `try_lock` return a `Result`.
 
 - https://doc.rust-lang.org/stable/std/sync/struct.Mutex.html#poisoning
 - https://sunshowers.io/posts/on-poisoning/
 
+## Posix Mutex
+> A mutex is a MUTual EXclusion device, and is useful for protecting shared data structures from concurrent modifications, and
+> and implementing critical sections and monitors
+> ~ man page for pthread_mutex_init
 
 ## References
 - https://doc.rust-lang.org/stable/std/sync/struct.Mutex.html
