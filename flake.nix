@@ -38,13 +38,14 @@
         rustToolchain =
           with inputs.fenix.packages.${prev.stdenv.hostPlatform.system};
           combine (
-            with stable;
+            with complete;
             [
               clippy
               rustc
               cargo
               rustfmt
               rust-src
+              miri
             ]
           );
       };
